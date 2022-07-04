@@ -1,1 +1,1 @@
-# Simple calculator written in React
+Simple calculator written in React
