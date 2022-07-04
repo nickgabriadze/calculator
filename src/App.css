@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+body{
+    background: linear-gradient(to left, #43C6AC , #191654);   
+}
+
+.calculator{
+    
+    display: grid;
+    grid-gap: 1px;
+    margin-top: 20px;
+    padding: 10px;
+    grid-template-columns: repeat(4,6rem);
+    grid-template-rows: minmax(6rem, auto) repeat(6, 6rem);
+    place-content: center;
+    word-wrap : break-word;
+    word-break:  break-all;
+   
+    
+}
+
+#operators,  #numbers, #others, #equals{
+     font-size: 1.5rem;
+     color: #43C6AC;
+     font-family: 'Anek Latin', sans-serif;
+     background-color: rgba(137, 137, 137, 0.1);
+}
+
+#operators:hover, #numbers:hover, #others:hover, #equals:hover{
+    background-color:  rgba(68, 61, 61, 0.3);
+}
+.calculator > Button:hover{
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+    background-color: rgba(37, 37, 37, 0.75);
+   
+}
+
+#others{
+    grid-column: span 2;
+}
+#output{
+    display: flex;
+    padding-right: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    font-family: 'Anek Latin', sans-serif;
+    grid-column: 1 / -1;
+    border-radius: 5px;
+    color: #000000e2;
+    font-size: 1.5rem;
+   
+    outline-style:dashed;
+    outline-color: black;
+    outline-width: 2px;
+    background: linear-gradient(to right, #43C6AC , #9493a4);   
+}
+
+#first, #second{
+    padding: 5px;
+}
