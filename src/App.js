@@ -23,9 +23,7 @@ const reducer = (state, { type, payload }) => {
       if (state.expr.length > state.main.length) {
         state.main = state.expr
       }
-       if(state.expr.length < state.main.length){
-        state.main = state.expr
-      }
+      
       if (state.expr[0] == 0 & payload.digit == '0') {
         return state;
       }
