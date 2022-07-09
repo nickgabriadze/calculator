@@ -92,6 +92,7 @@ const reducer = (state, { type, payload }) => {
         {
           ...state,
           expr: state.expr.slice(0, -1),
+          main: state.main.slice(0, -1)
         }
       )
     case ACTIONS.ALL_CLEAR:
