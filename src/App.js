@@ -35,14 +35,11 @@ const reducer = (state, { type, payload }) => {
       if (state.expr.includes(".") & payload.digit === '.') {
         return state;
       }
-      if (state.evaluated) {
-        return ({
-          ...state,
-          expr: '',
-          main: '',
-          evaluated: false
-        })
+      
+      if(state.addOp){
+        return state
       }
+
       return ({
         ...state,
         expr: state.expr + payload.digit,
@@ -71,11 +68,21 @@ const reducer = (state, { type, payload }) => {
         return state;
       }
 
+      if(state.addOp){
+        state.expr = state.expr + payload.operation
+        return({
+        main: state.expr,
+        expr: '',
+        opCount: true,
+        addOp: false
+      })
+      }
       return ({
         ...state,
         main: state.main + payload.operation,
         expr: '',
-        opCount: true
+        opCount: true,
+        addOp: false
       })
 
     case ACTIONS.DELETE:
@@ -92,19 +99,22 @@ const reducer = (state, { type, payload }) => {
         {
           ...state,
           expr: state.expr.slice(0, -1),
-          main: state.main.slice(0, -1)
+          main: state.main.slice(0, -1),
+          addOp: false
         }
       )
     case ACTIONS.ALL_CLEAR:
       if (state.expr == null || state.main == null) {
-        return state;
+        state.expr = ''
+        state.main = ''
       }
 
       return ({
         ...state,
         expr: '',
         main: '',
-        opCount: false
+        opCount: false,
+        addOp: false
       })
     case ACTIONS.EVALUATE:
       if (state.main == null || state.main == '') {
@@ -128,13 +138,12 @@ const reducer = (state, { type, payload }) => {
       }
 
       return ({
-        main: eval(state.main).toString(),
-        expr: '',
-        evaluated: true
-
+        expr: eval(state.main).toString(),
+        main:'',
+        evaluated: true,
+        addOp: true
       })
   }
-
 }
 
 
