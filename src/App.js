@@ -27,9 +27,9 @@ const reducer = (state, { type, payload }) => {
       if (state.expr[0] == 0 & payload.digit == '0') {
         return state;
       }
-      if (state.expr[0] == 0 & state.expr >= 1) {
+      if (state.expr[0] == 0 & state.expr.length >= 1) {
         state.expr = state.expr.slice(1,)
-        state.main = state.expr
+        state.main = state.expr.slice(1,)
       }
 
       if (state.expr.includes(".") & payload.digit === '.') {
