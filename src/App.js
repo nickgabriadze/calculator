@@ -93,6 +93,7 @@ const reducer = (state, { type, payload }) => {
       if (state.expr === '') {
         state.expr = state.main
         state.main = ''
+        
       }
 
       return (
@@ -100,7 +101,7 @@ const reducer = (state, { type, payload }) => {
           ...state,
           expr: state.expr.slice(0, -1),
           main: state.main.slice(0, -1),
-          addOp: false
+         
         }
       )
     case ACTIONS.ALL_CLEAR:
@@ -145,6 +146,7 @@ const reducer = (state, { type, payload }) => {
       })
   }
 }
+
 
 
 function Calculator() {
