@@ -21,15 +21,12 @@ const reducer = (state, { type, payload }) => {
         state.main = ''
       }
 
-      if(state.expr === '' & payload.digit === '0'){
-        return state
-      }
 
       if (state.expr.length > state.main.length) {
         state.main = state.expr
       }
 
-      if (state.expr[0] == 0 & payload.digit == '0') {
+      if (state.expr[0] == 0 & payload.digit == '0' & state.expr[1] != '.') {
         return state;
       }
       if (state.expr[0] == 0 & state.expr.length >= 1) {
@@ -54,9 +51,9 @@ const reducer = (state, { type, payload }) => {
 
     case ACTIONS.DISPLAY_OPERATION:
       
-      if ((state.main == null || state.expr == null) & payload.operation == '-') {
+      if ((state.main == null || state.expr == null ||state.expr == ''|| state.expr === '') & payload.operation == '-') {
         state.expr = ''
-        state.main = ''
+        
         return ({
           ...state,
           expr: state.expr + '-',
