@@ -20,10 +20,15 @@ const reducer = (state, { type, payload }) => {
         state.expr = ''
         state.main = ''
       }
+
+      if(state.expr === '' & payload.digit === '0'){
+        return state
+      }
+
       if (state.expr.length > state.main.length) {
         state.main = state.expr
       }
-      
+
       if (state.expr[0] == 0 & payload.digit == '0') {
         return state;
       }
@@ -35,8 +40,8 @@ const reducer = (state, { type, payload }) => {
       if (state.expr.includes(".") & payload.digit === '.') {
         return state;
       }
-      
-      if(state.addOp){
+
+      if (state.addOp) {
         return state
       }
 
@@ -48,17 +53,19 @@ const reducer = (state, { type, payload }) => {
       })
 
     case ACTIONS.DISPLAY_OPERATION:
-
-      if ((state.expr == null || state.expr == '') & payload.operation == '-') {
+      
+      if ((state.main == null || state.expr == null) & payload.operation == '-') {
         state.expr = ''
         state.main = ''
         return ({
           ...state,
           expr: state.expr + '-',
-          main: state.expr + '-'
-
+          main: state.expr + '-',
+          opCount: true,
         })
       }
+
+      
 
       if (state.expr == null || state.expr == '') {
         return state;
@@ -68,14 +75,14 @@ const reducer = (state, { type, payload }) => {
         return state;
       }
 
-      if(state.addOp){
+      if (state.addOp) {
         state.expr = state.expr + payload.operation
-        return({
-        main: state.expr,
-        expr: '',
-        opCount: true,
-        addOp: false
-      })
+        return ({
+          main: state.expr,
+          expr: '',
+          opCount: true,
+          addOp: false
+        })
       }
       return ({
         ...state,
@@ -93,7 +100,7 @@ const reducer = (state, { type, payload }) => {
       if (state.expr === '') {
         state.expr = state.main
         state.main = ''
-        
+
       }
 
       return (
@@ -101,7 +108,7 @@ const reducer = (state, { type, payload }) => {
           ...state,
           expr: state.expr.slice(0, -1),
           main: state.main.slice(0, -1),
-         
+
         }
       )
     case ACTIONS.ALL_CLEAR:
@@ -115,7 +122,8 @@ const reducer = (state, { type, payload }) => {
         expr: '',
         main: '',
         opCount: false,
-        addOp: false
+        addOp: false,
+        
       })
     case ACTIONS.EVALUATE:
       if (state.main == null || state.main == '') {
@@ -133,14 +141,14 @@ const reducer = (state, { type, payload }) => {
       if (state.expr == '.') {
         return ({
           main: '0',
-          expr: '',
+          expr: '0',
           evaluated: true
         })
       }
 
       return ({
         expr: eval(state.main).toString(),
-        main:'',
+        main: '',
         evaluated: true,
         addOp: true
       })
